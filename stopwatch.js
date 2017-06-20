@@ -55,7 +55,6 @@ function stopwatchUpdate(){
 
 function stopwatchLap(){
   event.preventDefault();
-  console.log('lapped');
 
   // save log to log array
   laps.push(formatTime(rawTime));
@@ -73,7 +72,18 @@ function stopwatchLap(){
 
 function stopwatchReset(){
   event.preventDefault();
-  console.log('reset');
+
+  // watch could be running, stop it.
+  stopwatchStop();
+
+  // clear the log
+  laps.splice(0);
+  lapList.innerHTML = "";
+
+  // clear the time
+  rawTime = 0;
+  stopwatchTime.innerHTML = formatTime(rawTime);
+
 }
 
 document.addEventListener("DOMContentLoaded", function () {
