@@ -1,6 +1,5 @@
 // button controls
 const start = document.querySelector('button.start');
-const stop = document.querySelector('button.stop');
 const lap = document.querySelector('button.lap');
 const reset = document.querySelector('button.reset');
 
@@ -37,25 +36,36 @@ function zeroPad (value) {
 // start the stopwatch
 function stopwatchStart(){
   event.preventDefault();
-  intervalId = setInterval(stopwatchUpdate, intervalRate);
 
-  // disable the start button, block the user from starting multiple intervals
-  start.disabled = true;
   // when the time is running, enable the lap button
   lap.disabled = false;
+  if (this.innerText == "Start") {
+    // start the time
+    intervalId = setInterval(stopwatchUpdate, intervalRate);
+
+    // toggle button text
+    this.innerText = "Stop";
+
+    // enable the lap button
+    lap.disabled = false;
+  } else {
+    // toggle button text
+    this.innerText = "Start";
+
+    // stop the time
+    clearInterval(intervalId);
+
+    // since the time is not running, disable the lap button
+    lap.disabled = true;
+  }
 }
 
-// stop the watch, but keep the time and log displayed
 function stopwatchStop(){
   event.preventDefault();
   clearInterval(intervalId);
-
-  // reenable start button
-  start.disabled = false;
-
-  // since the time is not running, disable the lap button
   lap.disabled = true;
 }
+
 
 // display updated elapsed time
 function stopwatchUpdate(){
@@ -107,7 +117,6 @@ function stopwatchReset(){
 document.addEventListener("DOMContentLoaded", function () {
   // event handlers
   start.addEventListener('click', stopwatchStart);
-  stop.addEventListener('click', stopwatchStop);
   lap.addEventListener('click', stopwatchLap);
   reset.addEventListener('click', stopwatchReset);
 
