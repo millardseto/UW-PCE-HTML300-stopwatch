@@ -32,11 +32,7 @@ function zeroPad (value) {
   return `${pad}${value}`
 }
 
-// event handlers
-start.addEventListener('click', stopwatchStart);
-stop.addEventListener('click', stopwatchStop);
-lap.addEventListener('click', stopwatchLap);
-reset.addEventListener('click', stopwatchReset);
+
 
 // start the stopwatch
 function stopwatchStart(){
@@ -82,7 +78,7 @@ function stopwatchReset(){
   stopwatchStop();
 
   // clear the log
-  laps.splice(0);
+  laps.splice(0); // workaround to clear constant array
   lapList.innerHTML = "";
 
   // clear the time
@@ -92,7 +88,9 @@ function stopwatchReset(){
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log('ready!')
-
-
+  // event handlers
+  start.addEventListener('click', stopwatchStart);
+  stop.addEventListener('click', stopwatchStop);
+  lap.addEventListener('click', stopwatchLap);
+  reset.addEventListener('click', stopwatchReset);
 })
