@@ -42,6 +42,8 @@ button:active {
   font-size: 2rem;
   text-align: center;
   margin: 0 0 2rem;
+  background-color: rgb(61,231,113); /* lcd light green */
+  color: rgb(24, 103, 63); /* lcd dark green */  
 }
 
 #stopwatchControls {
