@@ -25,6 +25,7 @@ button {
   padding: 0.2rem 0.5rem;
   transition: all 0.2s ease;
   min-width: 3rem;
+  border-radius: 25px;
 }
 
 button:focus,

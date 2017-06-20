@@ -33,12 +33,11 @@ function zeroPad (value) {
 
 
 
-// start the stopwatch
+// START/STOP the stopwatch
 function stopwatchStart(){
   event.preventDefault();
 
-  // when the time is running, enable the lap button
-  lap.disabled = false;
+  // START
   if (this.innerText == "Start") {
     // start the time
     intervalId = setInterval(stopwatchUpdate, intervalRate);
@@ -46,9 +45,11 @@ function stopwatchStart(){
     // toggle button text
     this.innerText = "Stop";
 
-    // enable the lap button
+    // when the time is running, enable the lap button
     lap.disabled = false;
   } else {
+    // STOP
+
     // toggle button text
     this.innerText = "Start";
 
@@ -60,9 +61,14 @@ function stopwatchStart(){
   }
 }
 
+// STOP - stops the running time
 function stopwatchStop(){
   event.preventDefault();
+
+  // Stop the clock
   clearInterval(intervalId);
+
+  // lap not needed when clock is stopped
   lap.disabled = true;
 }
 
@@ -73,7 +79,7 @@ function stopwatchUpdate(){
   stopwatchTime.innerHTML = formatTime(rawTime);
 }
 
-// save the current time to the lap log, keep clock running
+// LAP - save the current time to the lap log, keep clock running
 function stopwatchLap(){
   event.preventDefault();
 
@@ -89,10 +95,9 @@ function stopwatchLap(){
     li.innerText = time;
     lapList.appendChild(li);
   }
-
 }
 
-// stop and reset the stopwatch
+// RESET - stop and reset the stopwatch
 function stopwatchReset(){
   event.preventDefault();
 
@@ -109,11 +114,13 @@ function stopwatchReset(){
 
   // reenable start button
   start.disabled = false;
+  start.innerText = "Start";
 
   // since the time is not running, disable the lap button
   lap.disabled = true;
 }
 
+// When the dom is ready, wire up event handlers
 document.addEventListener("DOMContentLoaded", function () {
   // event handlers
   start.addEventListener('click', stopwatchStart);
