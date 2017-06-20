@@ -32,27 +32,31 @@ function zeroPad (value) {
   return `${pad}${value}`
 }
 
+// event handlers
 start.addEventListener('click', stopwatchStart);
 stop.addEventListener('click', stopwatchStop);
 lap.addEventListener('click', stopwatchLap);
 reset.addEventListener('click', stopwatchReset);
 
-
+// start the stopwatch
 function stopwatchStart(){
   event.preventDefault();
   intervalId = setInterval(stopwatchUpdate, intervalRate);
 }
 
+// stop the watch, but keep the time and log displayed
 function stopwatchStop(){
   event.preventDefault();
   clearInterval(intervalId);
 }
 
+// display updated elapsed time
 function stopwatchUpdate(){
   rawTime += intervalRate;
   stopwatchTime.innerHTML = formatTime(rawTime);
 }
 
+// save the current time to the lap log, keep clock running
 function stopwatchLap(){
   event.preventDefault();
 
@@ -70,6 +74,7 @@ function stopwatchLap(){
 
 }
 
+// stop and reset the stopwatch
 function stopwatchReset(){
   event.preventDefault();
 
