@@ -38,12 +38,23 @@ function zeroPad (value) {
 function stopwatchStart(){
   event.preventDefault();
   intervalId = setInterval(stopwatchUpdate, intervalRate);
+
+  // disable the start button, block the user from starting multiple intervals
+  start.disabled = true;
+  // when the time is running, enable the lap button
+  lap.disabled = false;
 }
 
 // stop the watch, but keep the time and log displayed
 function stopwatchStop(){
   event.preventDefault();
   clearInterval(intervalId);
+
+  // reenable start button
+  start.disabled = false;
+
+  // since the time is not running, disable the lap button
+  lap.disabled = true;
 }
 
 // display updated elapsed time
@@ -55,6 +66,7 @@ function stopwatchUpdate(){
 // save the current time to the lap log, keep clock running
 function stopwatchLap(){
   event.preventDefault();
+
 
   // save log to log array
   laps.push(formatTime(rawTime));
@@ -85,6 +97,11 @@ function stopwatchReset(){
   rawTime = 0;
   stopwatchTime.innerHTML = formatTime(rawTime);
 
+  // reenable start button
+  start.disabled = false;
+
+  // since the time is not running, disable the lap button
+  lap.disabled = true;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -93,4 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
   stop.addEventListener('click', stopwatchStop);
   lap.addEventListener('click', stopwatchLap);
   reset.addEventListener('click', stopwatchReset);
+
+  // since the time is not running, disable the lap button
+  lap.disabled = true;
 })
