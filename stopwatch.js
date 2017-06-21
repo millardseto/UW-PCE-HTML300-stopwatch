@@ -15,6 +15,16 @@ const intervalRate = 10; // update the stopwatch every xxx milliseconds
 let intervalId = null;
 let rawTime = 0;
 
+// play audio
+function playSound(sound) {
+  // we need to get the right <audio> element
+  let element = document.getElementById(sound);
+  // based on the note passed in
+  element.currentTime = 0
+  element.play()
+}
+
+
 // turns the time into a human readable format
 function formatTime (raw) {
   let seconds = Math.floor(raw / 1000)
@@ -37,8 +47,11 @@ function zeroPad (value) {
 function stopwatchStart(){
   event.preventDefault();
 
+
   // START
   if (this.innerText == "Start") {
+    playSound('beep-high');
+
     // start the time
     intervalId = setInterval(stopwatchUpdate, intervalRate);
 
@@ -49,6 +62,7 @@ function stopwatchStart(){
     lap.disabled = false;
   } else {
     // STOP
+    playSound('beep-low');
 
     // toggle button text
     this.innerText = "Start";
@@ -82,7 +96,7 @@ function stopwatchUpdate(){
 // LAP - save the current time to the lap log, keep clock running
 function stopwatchLap(){
   event.preventDefault();
-
+  playSound('beep-low');
 
   // save log to log array
   laps.push(formatTime(rawTime));
@@ -100,6 +114,7 @@ function stopwatchLap(){
 // RESET - stop and reset the stopwatch
 function stopwatchReset(){
   event.preventDefault();
+  playSound('beep-double');
 
   // watch could be running, stop it.
   stopwatchStop();

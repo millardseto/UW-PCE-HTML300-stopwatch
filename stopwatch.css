@@ -41,13 +41,18 @@ button:active {
 #stopwatchTime {
   font-size: 2rem;
   text-align: center;
-  margin: 0 0 2rem;
+  margin: 2rem;
   background-color: rgb(61,231,113); /* lcd light green */
-  color: rgb(24, 103, 63); /* lcd dark green */  
+  color: rgb(24, 103, 63); /* lcd dark green */
 }
 
 #stopwatchControls {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+#lapList {
+  list-style-type: none;
+  margin-left: 2rem;
 }
