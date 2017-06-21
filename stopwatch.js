@@ -127,9 +127,10 @@ function stopwatchReset(){
   rawTime = 0;
   stopwatchTime.innerHTML = formatTime(rawTime);
 
-  // reenable start button
+  // reenable start button and set focus to it.
   start.disabled = false;
   start.innerText = "Start";
+  start.focus();
 
   // since the time is not running, disable the lap button
   lap.disabled = true;
